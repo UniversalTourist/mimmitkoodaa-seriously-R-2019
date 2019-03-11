@@ -11,7 +11,7 @@ source("PlottingAssets.R")
 head(Dataset, 10)
 
 
-# Ex 1 - Critics Score VS User Score --------------------------------------------------------------------
+# Project 1 - Critics Score VS User Score --------------------------------------------------------------------
 
 # Step 1-) Filter out missing values in the Critic.Score and User.Score variables
 
@@ -44,7 +44,7 @@ Plot <- Plot + geom_smooth(method = "lm")
 
 Plot
 
-# Ex 2 - Total videogames sold over time --------------------------------------------------------------------
+# Project 2 - Total videogames sold over time --------------------------------------------------------------------
 
 
 # Step 1-) Get the Total Sales in 2018 broken down by Month
@@ -90,7 +90,7 @@ Plot <- Plot + geom_smooth(method = "lm")
 Plot
 
 
-# Ex 3 - Total videogames sold over time broken down by top 3 Consoles in terms of released games in 2018 --------------------------------------------------------------------
+# Project 3 - Total videogames sold over time broken down by top 3 Consoles in terms of released games in 2018 --------------------------------------------------------------------
 
 
 # Step 1-) Get The Top 3 Consoles in terms of amount of released games in 2018 
@@ -144,7 +144,7 @@ Plot <-  Plot +
 Plot
 
 
-# Ex 4 - Total Sales By top 5 Developers and Top 5 Consoles in terms of Sales --------------------------------------------------------------------
+# Project 4 - Total Sales By top 5 Developers and Top 5 Consoles in terms of Sales --------------------------------------------------------------------
 
 # Step 1-) Get the Top 5 Developers in terms of Total Sales in 2018
 
