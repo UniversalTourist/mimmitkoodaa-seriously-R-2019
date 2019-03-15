@@ -30,10 +30,10 @@ df_example_3 <- df %>%
 
 df_example_4 <- df %>%
   filter(Release.Date.Pretty > '1990-01-01') %>%
-  mutate(age_in_days = as.Date(Sys.Date()) - Release.Date.Pretty) %>%
+  mutate(age_in_days = Sys.Date() - Release.Date.Pretty) %>%
   arrange(desc(Total.Sales)) %>%
-  select(Game, Total.Sales)
-
+  select(Game, Total.Sales, age_in_days)
+df_example_4
 
 df_example_5 <- df %>%
   mutate(percentage_North_America_from_total = NA.Sales/Total.Sales) %>%
@@ -43,10 +43,10 @@ df_example_5 <- df %>%
 
 
 df_example_6 <- df %>%
-  mutate(days_since_last_update_of_data = as.Date(Sys.Date()) - Last.Update.Pretty) %>%
+  mutate(days_since_last_update_of_data = Sys.Date() - Last.Update.Pretty) %>%
   arrange(days_since_last_update_of_data) %>%
   select(Game, days_since_last_update_of_data, Last.Update.Pretty)
-
+df_example_6
 
 df_example_7 <- df %>%
   filter(is.na(Critic.Score) == FALSE,
