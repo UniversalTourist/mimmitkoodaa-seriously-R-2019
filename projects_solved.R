@@ -1,8 +1,13 @@
 options(scipen = 100)
 
+list.of.packages <- c("scales", "tidyverse")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
 library(tidyverse)
 library(scales)
 source("Preprocess.R")
+
 
 # First of all, check out the Dataframe!
 head(df, 10)
@@ -47,7 +52,7 @@ Plot <- Plot +
 Plot <- Plot +
   BasicTheme
 
-# BONUS Step 5-) Use the geom_smooth() layer to include a linear trend line
+# OPTIONAL Step 5-) Use the geom_smooth() layer to include a linear trend line
 
 Plot <- Plot + geom_smooth(method = "lm")
 
@@ -72,7 +77,7 @@ Plot <-
   ggplot(data = SalesByMonth , aes(x = Release.Month , y = Sales)) +
   geom_line(group = 1 , color = '#ffa500')
 
-# Step 3-) Provide a nicer format for the y-axis values (comma separated thousands and € sign)
+# OPTIONAL Step 3-) Provide a nicer format for the y-axis values (comma separated thousands and € sign)
 
 Plot <- Plot +
   scale_y_continuous(labels = scales::number_format(big.mark = ","))
@@ -91,10 +96,6 @@ Plot <- Plot + labs(
 
 Plot <- Plot +
   BasicTheme
-
-# BONUS Step 5-) Use the geom_smooth() layer to include a linear trend line
-
-Plot <- Plot + geom_smooth(method = "lm")
 
 # Result:
 
