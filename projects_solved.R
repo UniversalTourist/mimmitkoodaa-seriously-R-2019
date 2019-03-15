@@ -43,7 +43,7 @@ Plot <-
 # Step 3-) Use the labs layer to provide a Title, a Subtitle and x-y labels to the plot
 
 Plot <- Plot +
-  labs(title = "Total Videogames Sales VS User Scores",
+  labs(title = "VG Chartz Scores VS Critic Scores",
        x = "Critic Scores (0-10)",
        y = "VG Chartz Scores (0-10)")
 
