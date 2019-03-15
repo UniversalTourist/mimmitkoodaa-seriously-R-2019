@@ -29,11 +29,11 @@ df_example_3 <- df %>%
 # mutate examples start here
 
 df_example_4 <- df %>%
-  filter(Release.Date.Pretty > '1990-01-01') %>%
+  filter(Release.Date.Pretty > as.Date('1990-01-01')) %>%
   mutate(age_in_days = Sys.Date() - Release.Date.Pretty) %>%
   arrange(desc(Total.Sales)) %>%
   select(Game, Total.Sales, age_in_days)
-df_example_4
+
 
 df_example_5 <- df %>%
   mutate(percentage_North_America_from_total = NA.Sales/Total.Sales) %>%
