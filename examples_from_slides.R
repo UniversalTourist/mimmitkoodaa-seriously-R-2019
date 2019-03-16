@@ -1,7 +1,7 @@
 # install.packages('tidyverse')
 
 library(tidyverse)
-df <- read_csv('worked_data.csv')
+df <- read_csv('data/worked_data.csv')
 
 head(df)
 summary(df)
@@ -65,4 +65,64 @@ df_example_8 <- df %>%
   arrange(desc(jp.percentage)) %>%
   filter(jp.percentage < 1)
 df_example_8
+
+
+## Visualizations
+# Visualization 1
+df_example_7 <- df %>%
+  filter(is.na(Critic.Score) == FALSE,
+         is.na(User.Score) == FALSE) %>%
+  mutate(difference_in_score = User.Score - Critic.Score) %>%
+  arrange(desc(difference_in_score)) %>%
+  select(Game, difference_in_score, Total.Sales, User.Score, Critic.Score)
+
+p <- ggplot(data = df_example_7, mapping = aes(x = Critic.Score, y = User.Score, size = Total.Sales)) 
+p <- p + geom_point() 
+p <- p + theme_bw()
+p <- p + labs(x = 'Critic Score', y = 'User Score', title = 'How does the critic score compare to user score for top sold games?', size = 'Total Sales')
+p
+
+# Visualization 2
+df_example_9 <-
+  df %>% 
+  filter(Console %in% c('PS', 'PS2', 'PS3', 'PS4'), Release.Year >= 1994) %>% 
+  group_by(Release.Year) %>% 
+  summarise(Total.Sales = sum(Total.Sales, na.rm = T)) 
+
+df_example_9
+
+p <- ggplot(data = df_example_9, mapping = aes(x = Release.Year, y = Total.Sales)) 
+p <- p + geom_line()
+p <- p + geom_point()
+p <- p + theme_bw()
+p <- p + labs(x = 'Release Year', y = 'Total Sales', title = 'Total PlayStation Games Sales over Years')
+p 
+
+# Visualization 3 
+df_example_10 <-
+  df %>% 
+  filter(Console %in% c('PS', 'PS2', 'PS3', 'PS4'), Release.Year >= 1994) %>% 
+  group_by(Release.Year, Console) %>% 
+  summarise(Total.Sales = sum(Total.Sales, na.rm = T)) 
+
+df_example_10
+
+p <- ggplot(data = df_example_10, mapping = aes(x = Release.Year, y = Total.Sales, color = Console)) 
+p <- p + geom_line()
+p <- p + geom_point()
+p <- p + theme_bw()
+p <- p + labs(x = 'Release Year', y = 'Total Sales', title = 'How many PlayStation games (by models) are sold over the years?', color = 'Console Type')
+p 
+
+# Visualization 4
+df_example_11 <- 
+  df_example_8 %>% 
+  gather(key = region, value = sales, NA.Sales.all.games, Japan.Sales.all.games, PAL.Sales.all.games)  
+
+p <- ggplot(data = df_example_11, mapping = aes(x = reorder(Console, sales), y = sales, fill = region)) 
+p <- p + geom_col()
+p <- p + theme_bw() 
+p <- p + coord_flip()
+p <- p + labs(x = 'Console', y = 'Total Sales', title = 'How many games are sold (by console type) in different regions?', fill = 'Region')
+p
 
